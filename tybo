@@ -1,0 +1,48 @@
+import numpy as np
+import scipy as sp
+import pandas as pd
+import matplotlib as mpl
+import seaborn as sns
+
+import os
+
+# Get your current working directory
+cwd = os.getcwd()
+# Path to the texts folder
+directory = os.path.join(cwd, 'texts')
+
+corpus = []
+# reading files from the directory and adding them to a list
+for subdir, dirs, files in os.walk(directory):
+    for file in files:
+        if file.endswith(".txt"):
+            f=open(os.path.join(subdir, file),'r', encoding="utf8")
+            a = f.read()
+            corpus.append(a)
+            f.close()
+
+# opening the file in read mode
+my_file = open("C:\\Users\\chris\\Downloads\\ITM618-041-assignment-02-Text-Mining-data (1).txt" , "r")
+
+# reading the file
+data = my_file.read()
+
+# printing the data
+print(data_into_list)
+my_file.close()
+
+
+nltk.download()
+import re # re module provides regular expression matching operations
+
+from nltk.data2 import stopwords
+StopWords = stopwords.words("english")
+# basic operations on text data
+for i in range(len(corpus)):
+    doc = corpus[i]
+    doc = re.sub('\s+', ' ', doc) # substitutes newline/tab/space with one space in the text
+    doc = re.sub(r'[@]+', '', doc) # remove numbers 
+    doc = re.sub(r'[^\w\s]', '', doc) # remove punctuation
+    doc = doc.lower()
+    doc = ' '.join([word for word in doc.split() if word not in StopWords])
+    corpus[i] = doc
